@@ -1,6 +1,7 @@
 import webapp2
 import os
 import jinja2
+from urllib2 import *
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape  = True)
@@ -20,6 +21,11 @@ class MainHandler(Handler):
     def get(self):
         self.render("geocoder.html", title="geocoder")
 
+class replyhandler(Handler):
+	def get(self):
+		pass
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/coords', replyhandler)
 ], debug=True)
