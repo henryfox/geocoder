@@ -2,6 +2,7 @@ import webapp2
 import os
 import jinja2
 from urllib2 import *
+import json
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape  = True)
@@ -23,7 +24,12 @@ class MainHandler(Handler):
 
 class replyhandler(Handler):
 	def get(self):
-		pass
+		self.adress = self.request.get("adress")
+		api_key_file = os.path.join(os.path.dirname(__file__), "secret.txt")
+		api_key = open(api_key_file)
+		api_key = api_key.read()
+		self.response.out.write(api_key)
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
