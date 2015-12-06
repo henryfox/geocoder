@@ -34,6 +34,7 @@ class replyhandler(Handler):
 		geometry = j["results"][0]["geometry"]["location"]
 		lat = geometry["lat"]
 		lng = geometry["lng"]
+		formated_adress = j["results"][0]["formatted_address"]
 		self.render("response.html", title="response", lat=lat, lng=lng, adress=formated_adress)
 
 app = webapp2.WSGIApplication([
