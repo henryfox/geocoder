@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="/coords">
+<form action="/response">
 	<label>
 		type an address here
 		<input type="text" name="adress">
 </label>
 		<button class="btn btn-success">submit</button>
+		<br>
+		geocode <input type="radio" name="option" value="geocode" checked="checked">
+		<br>
+		reverse geocode <input type="radio" name="option" value="reverse-geocode">
 </form>
 {% endblock %}
