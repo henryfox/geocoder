@@ -18,7 +18,7 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        pass
+        self.render("geocoder.html", title="geocoder")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
