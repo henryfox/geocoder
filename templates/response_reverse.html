@@ -1,4 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-
+	<h4>the adress is: {{ adress }}</h4>
+	<form action="/">
+		<img src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&markers={{ adress }}" alt="map" class="img-responsive">
+		<button class="btn btn-danger">back</button>
+	</form>
 {% endblock %}
