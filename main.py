@@ -1,7 +1,7 @@
 import webapp2
 import os
 import jinja2
-import urllib
+from urllib import urlopen
 import json
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -28,8 +28,12 @@ class replyhandler(Handler):
 		api_key_file = os.path.join(os.path.dirname(__file__), "secret.txt")
 		api_key = open(api_key_file)
 		api_key = api_key.read()
-		info = urllib.urlopen("https://maps.googleapis.com/maps/api/geocode/xml?address=%s&key=%s" % (self.adress, api_key))
+		info = urlopen("https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (self.adress, api_key))
 		info = info.read()
+		j = json.loads(info)
+		geometry = j["results"][0]["geometry"]["location"]
+		lat = geometry["lat"]
+		lng = geometry["lng"]
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
