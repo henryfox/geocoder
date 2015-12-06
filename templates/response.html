@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
-<h4>the latatude is: {{ lat }}</h4>
-<h4>the longatude is: {{ lng }}</h4>
-<h4>the adress is: {{ adress }}</h4>
+<h4>the latitude is: {{ lat }}</h4>
+<h4>the longitude is: {{ lng }}</h4>
+<h4>the address is: {{ adress }}</h4>
 <img src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&markers={{ lat }},{{ lng }}" alt="map" class="img-responsive">
 <form action="/">
     <button class="btn btn-danger">back</button>
