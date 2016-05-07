@@ -45,7 +45,30 @@ class replyhandler(Handler):
 		if option == "reverse-geocode":
 			self.render("response_reverse.html", adress=formated_adress, title="response")
 
+class api(webapp2.RequestHandler):
+	def get(self):
+		option = self.request.get("option")
+		adress = self.request.get("loc")
+		api_key_file = os.path.join(os.path.dirname(__file__), "secret.txt")
+		api_key = open(api_key_file)
+		api_key = api_key.read()
+		if option == "geocode":
+			info = urlopen("https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (adress, api_key))
+		if option == "reverse":
+			info = urlopen("https://maps.googleapis.com/maps/api/geocode/json?latlng=%s&key=%s" % (adress, api_key))
+		info = info.read()
+		j = json.loads(info)
+		geometry = j["results"][0]["geometry"]["location"]
+		if option == "geocode": 
+			lat = geometry["lat"]
+			lng = geometry["lng"]
+		formated_adress = j["results"][0]["formatted_address"]
+		if option == "geocode":
+			self.response.out.write(str(lat) + "," + str(lng))
+		if option == "reverse":
+			self.response.out.write(formated_adress)
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/response', replyhandler),
+    ('/api', api)
 ], debug=True)
