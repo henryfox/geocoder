@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+	p{
+		margin: 10px;
+		font-size: 15pt;
+	}
+	h3{
+		margin: 10px;
+	}
+</style>
+<table border="1">
+<tr>
+	<td><h3>adress</h3></td>
+	<td><h3>longatude and latatude</h3></td>
+	<td><h3>geocode or reverse</h3></td>
+	<td><h3>ip adress</h3></td>
+</tr>
+{% for item in query %}
+<tr>
+	<td><p>{{ item.adress }}</p></td>
+	<td><p>{{ item.gps }}</p></td>
+	<td><p>{{ item.grg }}</p></td>
+	<td><p>{{ item.ip }}</p></td>
+</tr>
+
+{% endfor %}
+</table>
+<a href="/delete">
+<button class="btn btn-danger">clear</button>
+</a>
+<a href="/logout">
+<button class="btn btn-warning">logout</button>
+</a>
+<a href="/analitics">
+	<button class="btn btn-info">analitics</button>
+</a>
+{% endblock %}
